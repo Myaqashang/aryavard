@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NaderEdit | Aryavard</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.013/Vazirmatn-font-face.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:wght@700&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { 
+      font-family: 'Vazirmatn', sans-serif; 
+      background: #0f0a05;
+      background-image: 
+        radial-gradient(circle at 30% 70%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23181005" d="M0 50 Q25 35, 50 50 T100 50 L100 100 L0 100 Z"/></svg>');
+      background-size: cover, cover, 300px;
+      color: #e8d5a3;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* بافت سنگ تاریخی */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" /><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.05 0"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.3"/></svg>') repeat;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 25px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header {
+      margin-bottom: 60px;
+    }
+
+    /* لوگو با افکت حکاکی */
+    .logo {
+      width: 140px; height: 140px;
+      margin: 0 auto 35px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 
+        0 0 30px rgba(184, 134, 11, 0.6),
+        0 0 60px rgba(139, 69, 19, 0.4),
+        inset 0 0 20px rgba(0,0,0,0.5);
+      animation: glowStone 4s infinite alternate;
+      border: 5px solid #b8860b;
+      background: #1a1208;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.1) contrast(1.2);
+      border-radius: 50%;
+      transition: transform 0.6s;
+    }
+
+    .logo:hover img {
+      transform: scale(1.12);
+    }
+
+    @keyframes glowStone {
+      0% { box-shadow: 0 0 30px rgba(184, 134, 11, 0.6), 0 0 60px rgba(139, 69, 19, 0.4), inset 0 0 20px rgba(0,0,0,0.5); }
+      100% { box-shadow: 0 0 50px rgba(184, 134, 11, 0.9), 0 0 90px rgba(139, 69, 19, 0.6), inset 0 0 30px rgba(0,0,0,0.7); }
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 56px;
+      margin-bottom: 25px;
+      color: #ffd700;
+      text-shadow: 
+        2px 2px 0 #8b4513,
+        4px 4px 0 #654321,
+        0 0 15px rgba(184, 134, 11, 0.7);
+      letter-spacing: 3px;
+      font-weight: 900;
+    }
+
+    /* شعر با فونت تاریخی */
+    .poem {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 2.2;
+      margin: 50px 0;
+      padding: 40px 30px;
+      background: rgba(20, 15, 10, 0.7);
+      border: 3px double #b8860b;
+      border-radius: 15px;
+      color: #f4e4bc;
+      text-shadow: 1px 1px 3px #000;
+      position: relative;
+      box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.6),
+        0 0 25px rgba(184, 134, 11, 0.3);
+    }
+
+    .poem::before, .poem::after {
+      content: '✦';
+      position: absolute;
+      color: #b8860b;
+      font-size: 28px;
+      top: 10px;
+    }
+    .poem::before { left: 20px; }
+    .poem::after { right: 20px; transform: scaleX(-1); }
+
+    .subtitle {
+      font-size: 21px;
+      opacity: 0.95;
+      margin: 40px 0;
+      line-height: 1.9;
+      font-weight: 500;
+      color: #e8d5a3;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 60px 0;
+    }
+
+    .btn {
+      padding: 18px 45px;
+      border: 2px solid #b8860b;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 19px;
+      text-decoration: none;
+      transition: all 0.5s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+      justify-content: center;
+      background: rgba(139, 69, 19, 0.3);
+      color: #ffd700;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: #b8860b;
+      color: #1a1208;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(184, 134, 11, 0.4);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 45px;
+      margin: 75px 0;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: rgba(30, 20, 10, 0.6);
+      border: 2px solid #8b4513;
+      padding: 30px;
+      border-radius: 15px;
+      min-width: 150px;
+      box-shadow: 
+        0 0 20px rgba(139, 69, 19, 0.3),
+        inset 0 0 15px rgba(0,0,0,0.5);
+      transition: all 0.4s;
+    }
+
+    .stat:hover {
+      transform: translateY(-8px);
+      border-color: #b8860b;
+      background: rgba(139, 69, 19, 0.4);
+    }
+
+    .stat h3 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      color: #ffd700;
+      font-weight: 900;
+      font-family: 'Cinzel', serif;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .stat p {
+      color: #e8d5a3;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .footer {
+      margin-top: 90px;
+      padding-top: 45px;
+      border-top: 2px solid #8b4513;
+      font-size: 17px;
+      color: #b8860b;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .creator {
+      margin-top: 70px;
+      padding: 25px;
+      background: rgba(20, 15, 10, 0.8);
+      border: 2px dashed #b8860b;
+      border-radius: 18px;
+      font-size: 18px;
+      color: #e8d5a3;
+      line-height: 2;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .creator a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .creator a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 42px; }
+      .poem { font-size: 24px; padding: 30px 20px; }
+      .btn { padding: 16px 35px; font-size: 17px; min-width: 190px; }
+      .stat { padding: 22px; }
+      .logo { width: 110px; height: 110px; }
+    }
+
+    @media (max-width: 480px) {
+      .btn-group { flex-direction: column; align-items: center; }
+      .btn { width: 80%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img src="https://uploadkon.ir/uploads/f10c13_25570808f842ee37b2f67c33ed7a639de1.jpg" alt="Aryavard Logo">
+      </div>
+      <h1>NaderEdit | Aryavard</h1>
+    </div>
+
+    <div class="poem">
+      جهاندار ضحاک را بند کرد<br>
+      به کوه اندرونش به پیوند کرد
+    </div>
+
+    <p class="subtitle">
+      ما صدای خاموش‌شده‌ی مردم هستیم.<br>
+      با هم ایران را پس می‌گیریم.
+    </p>
+
+    <div class="btn-group">
+      <a href="https://t.me/+j7Axv7BaOr02YzRk" class="btn">
+        گروه Aryavard
+      </a>
+      <a href="https://www.instagram.com/naderedit?igsh=MWhyZXdwaXNpbXlteQ==" class="btn">
+        @naderedit
+      </a>
+    </div>
+
+    <!-- اعداد انگلیسی + واقعی -->
+    <div class="stats">
+      <div class="stat">
+        <h3>54</h3>
+        <p>Group Members</p>
+      </div>
+      <div class="stat">
+        <h3>21k</h3>
+        <p>Instagram Followers</p>
+      </div>
+      <div class="stat">
+        <h3>100%</h3>
+        <p>Commitment to Freedom</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © ۱۴۰۴ NaderEdit | همه با هم برای ایران آزاد
+    </div>
+
+    <div class="creator">
+      این وبسایت توسط گروه 
+      <a href="https://t.me/+j7Axv7BaOr02YzRk" target="_blank">Aryavard</a> 
+      طراحی و ساخته شد.<br>
+      سفارش وبسایت، ربات و گرافیک حرفه‌ای: 
+      <a href="https://t.me/+j7Axv7BaOr02YzRk" target="_blank">پیام به گروه</a>
+    </div>
+  </div>
+
+</body>
+</html>
